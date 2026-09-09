@@ -1,0 +1,40 @@
+---
+interface Props {
+  title: string;
+  year: string;
+  type: string;
+  image: string;
+  offset?: string;
+  size?: string;
+  aspect?: string;
+}
+
+const {
+  title,
+  year,
+  type,
+  image,
+  offset = "",
+  size = "w-64 max-w-[300px]",
+  aspect = "aspect-[4/5]",
+} = Astro.props;
+---
+
+<article class:list={["group relative w-full max-w-[300px]", size, offset]}>
+  <div class={`overflow-hidden bg-ink/5 ${aspect}`}>
+    <img
+      src={image}
+      alt={title}
+      class="h-full w-full object-cover transition-transform duration-[800ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform group-hover:scale-[1.06] group-hover:-translate-y-1.5"
+      loading="lazy"
+    />
+  </div>
+  <div
+    class="mt-3 translate-y-1 opacity-0 transition-all duration-500 ease-out group-hover:translate-y-0 group-hover:opacity-100"
+  >
+    <h3 class="text-sm tracking-wide text-ink">{title}</h3>
+    <p class="caption mt-1 text-[10px] uppercase text-muted">
+      {year} · {type}
+    </p>
+  </div>
+</article>

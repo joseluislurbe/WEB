@@ -1,0 +1,736 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+
+const proyectos = [
+  {
+    id: 0,
+    numero: "01",
+    titulo: "Tenerife",
+    ano: "2026",
+    tipologia: "Fotografía",
+    imagen: "/proyectos/tenerife1.jpg.JPG"
+  },
+  {
+    id: 1,
+    numero: "02",
+    titulo: "Planta Malla Estructural",
+    ano: "2025",
+    tipologia: "Estructural",
+    imagen: "/proyectos/planta-malla.png"
+  },
+  {
+    id: 2,
+    numero: "03",
+    titulo: "Axonometría Malla",
+    ano: "2025",
+    tipologia: "Estructural",
+    imagen: "/proyectos/axonometriamalla.png"
+  },
+  {
+    id: 3,
+    numero: "04",
+    titulo: "Taller Sert",
+    ano: "2025",
+    tipologia: "Arquitectura",
+    imagen: "/proyectos/taller-sert1.png"
+  },
+  {
+    id: 4,
+    numero: "05",
+    titulo: "Collage I",
+    ano: "2025",
+    tipologia: "Dibujo",
+    imagen: "/proyectos/collage1.png"
+  },
+  {
+    id: 5,
+    numero: "06",
+    titulo: "Collage II",
+    ano: "2025",
+    tipologia: "Dibujo",
+    imagen: "/proyectos/collage2.png"
+  },
+  {
+    id: 6,
+    numero: "07",
+    titulo: "Plantas La Línea",
+    ano: "2025",
+    tipologia: "Dibujo",
+    imagen: "/proyectos/plantas-lalinea.png"
+  },
+  {
+    id: 7,
+    numero: "08",
+    titulo: "Collage Malla",
+    ano: "2025",
+    tipologia: "Estructural",
+    imagen: "/proyectos/Collage_Malla.png"
+  },
+  {
+    id: 8,
+    numero: "09",
+    titulo: "Ciudad Blanca",
+    ano: "2026",
+    tipologia: "Fotografía",
+    imagen: "/proyectos/ciudadblanca.JPG"
+  },
+  {
+    id: 9,
+    numero: "10",
+    titulo: "Sketch Malla",
+    ano: "2025",
+    tipologia: "Croquis",
+    imagen: "/proyectos/sketch-malla.jpg"
+  },
+  {
+    id: 10,
+    numero: "11",
+    titulo: "Diagrama Malla",
+    ano: "2025",
+    tipologia: "Estructural",
+    imagen: "/proyectos/diagramamalla.jpg"
+  },
+  {
+    id: 11,
+    numero: "12",
+    titulo: "Planta Detalle Malla",
+    ano: "2025",
+    tipologia: "Estructural",
+    imagen: "/proyectos/plantadetallemalla.png"
+  },
+  {
+    id: 12,
+    numero: "13",
+    titulo: "Moreno Barberá",
+    ano: "2026",
+    tipologia: "Arquitectura",
+    imagen: "/proyectos/morenobarberá.jpg"
+  }
+];
+---
+
+<Layout title="Jose Luis Lurbe — Architecture & Film Photography">
+  <div id="theme-wrapper" class="relative min-h-screen w-full bg-white text-neutral-900 transition-colors duration-500 ease-out pb-32">
+    <Header />
+
+    <!-- Botón desplegable about.me -->
+    <div class="fixed top-7 right-6 sm:right-8 md:right-12 z-40">
+      <button 
+        id="modal-toggle-btn"
+        class="px-3.5 py-1.5 text-xs sm:text-sm tracking-wider uppercase font-mono border border-neutral-900/20 bg-white/70 backdrop-blur-md hover:bg-neutral-900 hover:text-white transition-all duration-200 shadow-sm cursor-pointer"
+      >
+        about.me
+      </button>
+    </div>
+
+    <!-- 1. VENTANA FLOTANTE TRANSLÚCIDA (ABOUT.ME) -->
+    <aside 
+      id="about-modal"
+      class="fixed top-20 right-6 sm:right-8 md:right-12 z-40 w-[92vw] sm:w-[460px] md:w-[490px] rounded-2xl bg-neutral-900/85 backdrop-blur-2xl text-white shadow-2xl border border-white/15 p-6 sm:p-7 font-mono select-none transition-all duration-300 ease-out opacity-100 translate-y-0"
+    >
+      <div class="flex items-center justify-between pb-5 border-b border-white/10">
+        <button 
+          id="modal-close-dot" 
+          class="w-5 h-5 rounded-full bg-white flex items-center justify-center text-neutral-950 hover:bg-neutral-200 transition-all cursor-pointer border-0 p-0 shadow-sm" 
+          title="Cerrar ventana"
+          aria-label="Cerrar ventana"
+        >
+          <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <div class="flex items-center gap-2 text-xs text-neutral-300 font-sans tracking-wide">
+          <svg class="w-4 h-4 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+          </svg>
+          <span class="font-medium">about.me</span>
+        </div>
+      </div>
+
+      <div class="mt-5 space-y-5 font-sans">
+        <!-- About -->
+        <div class="grid grid-cols-[80px_1fr] gap-4 items-start leading-relaxed">
+          <span class="font-mono font-medium text-neutral-400 text-xs uppercase tracking-wider pt-0.5">About</span>
+          <p class="text-neutral-100 text-sm sm:text-[14px] font-normal leading-relaxed">
+            A curated selection of architectural projects produced since 2024. This portfolio brings together academic investigations and tactile 35mm captures, exploring how spatial thinking translates into some tangible design solutions and spontaneous frames of reality.
+          </p>
+        </div>
+
+        <div class="h-px bg-white/10 my-1"></div>
+
+        <!-- Contact -->
+        <div class="grid grid-cols-[80px_1fr] gap-4 items-start">
+          <span class="font-mono font-medium text-neutral-400 text-xs uppercase tracking-wider pt-0.5">Contact</span>
+          <div class="space-y-1.5 text-sm sm:text-[14px]">
+            <a href="mailto:joseluislurbe@gmail.com" class="block text-neutral-100 hover:text-white underline underline-offset-4 transition-colors">
+              joseluislurbe@gmail.com
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="block text-neutral-400 hover:text-white transition-colors">
+              Instagram
+            </a>
+          </div>
+        </div>
+
+        <div class="h-px bg-white/10 my-1"></div>
+
+        <!-- CV Trigger -->
+        <div class="grid grid-cols-[80px_1fr] gap-4 items-center">
+          <span class="font-mono font-medium text-neutral-400 text-xs uppercase tracking-wider">CV</span>
+          <button 
+            id="open-cv-btn" 
+            type="button"
+            class="text-left text-neutral-100 hover:text-white text-sm sm:text-[14px] font-medium underline underline-offset-4 transition-colors cursor-pointer bg-transparent border-0 p-0"
+          >
+            View CV &rarr;
+          </button>
+        </div>
+
+        <div class="h-px bg-white/10 my-1"></div>
+
+        <!-- Work -->
+        <div class="grid grid-cols-[80px_1fr] gap-4 items-start">
+          <span class="font-mono font-medium text-neutral-400 text-xs uppercase tracking-wider pt-0.5">Work</span>
+          <ul class="space-y-2 text-sm sm:text-[14px]">
+            <li class="flex items-center gap-2.5 text-neutral-200">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              Planta Malla Estructural
+            </li>
+            <li class="flex items-center gap-2.5 text-neutral-200">
+              <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+              Taller Sert
+            </li>
+            <li class="flex items-center gap-2.5 text-neutral-200">
+              <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+              Serie Tenerife 35mm
+            </li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 2. VENTANA DESPLEGABLE CV -->
+    <aside 
+      id="cv-modal"
+      class="fixed top-20 right-6 sm:right-8 md:right-12 z-50 w-[92vw] sm:w-[480px] md:w-[540px] max-h-[82vh] overflow-y-auto rounded-2xl bg-neutral-900/90 backdrop-blur-2xl text-white shadow-2xl border border-white/15 p-6 sm:p-7 font-mono select-none transition-all duration-300 ease-out opacity-0 pointer-events-none scale-95 translate-y-2"
+    >
+      <div class="flex items-center justify-between pb-4 border-b border-white/10 sticky top-0 bg-transparent z-10">
+        <span class="font-mono font-medium text-sm text-neutral-200 uppercase tracking-wider">CV</span>
+        <button 
+          id="close-cv-btn" 
+          type="button" 
+          class="text-xs font-mono tracking-wider text-neutral-400 hover:text-white uppercase transition-colors cursor-pointer bg-transparent border-0 p-0"
+        >
+          CLOSE
+        </button>
+      </div>
+
+      <div class="mt-5 space-y-6 font-sans text-xs sm:text-[13px]">
+        <div class="grid grid-cols-[100px_1fr] gap-4 items-start leading-relaxed">
+          <span class="font-mono font-medium text-neutral-400 text-xs uppercase tracking-wider pt-0.5">Education</span>
+          <div class="space-y-3 text-neutral-200">
+            <div>
+              <p class="font-semibold text-white">Degree in Architecture Studies</p>
+              <p class="text-neutral-400 text-[11px] sm:text-xs">Universitat Politècnica de València, 2024–Present</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="h-px bg-white/10"></div>
+
+        <div class="grid grid-cols-[100px_1fr] gap-4 items-start leading-relaxed">
+          <span class="font-mono font-medium text-neutral-400 text-xs uppercase tracking-wider pt-0.5">Competitions</span>
+          <div class="space-y-3 text-neutral-200">
+            <div>
+              <p class="font-semibold text-white">Malla Estructural Prototype</p>
+              <p class="text-neutral-400 text-[11px] sm:text-xs">Academic investigation on modular lightweight grids, 2025</p>
+            </div>
+            <div>
+              <p class="font-semibold text-white">Taller Sert Intervention</p>
+              <p class="text-neutral-400 text-[11px] sm:text-xs">Design proposal exploring Mediterranean architectural typologies, 2025</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="h-px bg-white/10"></div>
+
+        <div class="grid grid-cols-[100px_1fr] gap-4 items-start leading-relaxed">
+          <span class="font-mono font-medium text-neutral-400 text-xs uppercase tracking-wider pt-0.5">Experience</span>
+          <div class="space-y-3 text-neutral-200">
+            <div>
+              <p class="font-semibold text-white">Analog Photographic Archive — 2024–2026</p>
+              <p class="text-neutral-300 text-[11px] sm:text-xs leading-normal">
+                Independent documentation of spatial light, urban materiality, and landscape in 35mm film format.
+              </p>
+            </div>
+            <div>
+              <p class="font-semibold text-white">Architectural Drawing & Collage — 2025</p>
+              <p class="text-neutral-300 text-[11px] sm:text-xs leading-normal">
+                Development of technical plans, mixed-media collages, and axonometric representations.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="h-px bg-white/10"></div>
+
+        <div class="grid grid-cols-[100px_1fr] gap-4 items-start leading-relaxed">
+          <span class="font-mono font-medium text-neutral-400 text-xs uppercase tracking-wider pt-0.5">Languages</span>
+          <div class="space-y-1 text-neutral-200">
+            <p><span class="text-white font-medium">Spanish:</span> Native</p>
+            <p><span class="text-white font-medium">English:</span> Fluent</p>
+          </div>
+        </div>
+
+        <div class="h-px bg-white/10"></div>
+
+        <div class="grid grid-cols-[100px_1fr] gap-4 items-start leading-relaxed">
+          <span class="font-mono font-medium text-neutral-400 text-xs uppercase tracking-wider pt-0.5">Software</span>
+          <div class="space-y-2 text-neutral-200">
+            <p><span class="text-white font-medium">CAD / BIM:</span> AutoCAD, Revit</p>
+            <p><span class="text-white font-medium">Graphics:</span> Adobe Photoshop, Illustrator, InDesign, Affinity</p>
+            <p><span class="text-white font-medium">3D / Render:</span> Rhino, SketchUp</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MASONRY REAL MULTICOLUMNA -->
+    <main class="w-full px-4 sm:px-8 md:px-10 lg:px-12 py-10">
+      <div 
+        id="masonry-container" 
+        class="flex gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-start justify-between w-full"
+      >
+        <div class="masonry-col flex-1 flex flex-col"></div>
+        <div class="masonry-col flex-1 flex flex-col"></div>
+        <div class="masonry-col flex-1 flex flex-col"></div>
+        <div class="masonry-col flex-1 flex flex-col hidden sm:flex"></div>
+        <div class="masonry-col flex-1 flex flex-col hidden lg:flex"></div>
+      </div>
+
+      <div id="scroll-sentinel" class="w-full h-32"></div>
+    </main>
+
+    <!-- Botón flotante tema claro / oscuro -->
+    <button 
+      id="theme-toggle" 
+      class="fixed bottom-8 right-8 z-40 w-5 h-5 rounded-full bg-neutral-900 border border-neutral-700/20 shadow-md hover:scale-125 active:scale-95 transition-all duration-300 ease-out cursor-pointer"
+      aria-label="Cambiar tema de fondo"
+      title="Invertir fondo"
+    ></button>
+  </div>
+
+  <!-- Visor modal (Lightbox) -->
+  <div 
+    id="lightbox" 
+    class="fixed inset-0 z-50 bg-neutral-950/95 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-200 ease-out flex items-center justify-center p-4 cursor-zoom-out select-none"
+  >
+    <button 
+      id="lightbox-close" 
+      class="absolute top-6 right-6 text-white/60 hover:text-white text-2xl font-mono leading-none transition-colors p-2 z-20 cursor-pointer"
+      aria-label="Cerrar visor"
+    >
+      &times;
+    </button>
+
+    <button 
+      id="lightbox-prev" 
+      class="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-all text-3xl font-mono p-4 z-20 hover:scale-110 active:scale-95 cursor-pointer"
+      aria-label="Proyecto anterior"
+    >
+      &#x2190;
+    </button>
+
+    <button 
+      id="lightbox-next" 
+      class="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-all text-3xl font-mono p-4 z-20 hover:scale-110 active:scale-95 cursor-pointer"
+      aria-label="Siguiente proyecto"
+    >
+      &#x2192;
+    </button>
+
+    <div 
+      id="lightbox-card"
+      class="w-full max-w-6xl max-h-[94vh] flex flex-col items-center cursor-default scale-90 opacity-0 transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]"
+    >
+      <img 
+        id="lightbox-img" 
+        src="" 
+        alt="" 
+        class="w-auto h-auto max-w-[85vw] max-h-[82vh] object-contain shadow-2xl rounded-none transition-opacity duration-150"
+      />
+      <div class="mt-3 text-center text-white font-mono">
+        <p id="lightbox-title" class="text-sm font-medium tracking-tight"></p>
+        <p id="lightbox-sub" class="text-xs text-neutral-400 mt-0.5"></p>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script define:vars={{ proyectos }}>
+  // -------------------------------------------------------------
+  // CONTROL DE LAS VENTANAS DESPLEGABLES (ABOUT.ME & CV)
+  // -------------------------------------------------------------
+  const modalToggleBtn = document.getElementById('modal-toggle-btn');
+  const aboutModal = document.getElementById('about-modal');
+  const modalCloseDot = document.getElementById('modal-close-dot');
+
+  const cvModal = document.getElementById('cv-modal');
+  const openCvBtn = document.getElementById('open-cv-btn');
+  const closeCvBtn = document.getElementById('close-cv-btn');
+
+  let isModalOpen = true;
+
+  const toggleAboutModal = () => {
+    isModalOpen = !isModalOpen;
+    if (isModalOpen) {
+      aboutModal?.classList.remove('opacity-0', 'pointer-events-none', 'scale-95', 'translate-y-2');
+      aboutModal?.classList.add('opacity-100', 'scale-100', 'translate-y-0');
+    } else {
+      aboutModal?.classList.remove('opacity-100', 'scale-100', 'translate-y-0');
+      aboutModal?.classList.add('opacity-0', 'pointer-events-none', 'scale-95', 'translate-y-2');
+      closeCvModal();
+    }
+  };
+
+  const openCvModal = () => {
+    cvModal?.classList.remove('opacity-0', 'pointer-events-none', 'scale-95', 'translate-y-2');
+    cvModal?.classList.add('opacity-100', 'scale-100', 'translate-y-0');
+  };
+
+  const closeCvModal = () => {
+    cvModal?.classList.remove('opacity-100', 'scale-100', 'translate-y-0');
+    cvModal?.classList.add('opacity-0', 'pointer-events-none', 'scale-95', 'translate-y-2');
+  };
+
+  modalToggleBtn?.addEventListener('click', toggleAboutModal);
+  modalCloseDot?.addEventListener('click', toggleAboutModal);
+
+  openCvBtn?.addEventListener('click', openCvModal);
+  closeCvBtn?.addEventListener('click', closeCvModal);
+
+  // -------------------------------------------------------------
+  // FALLBACK DE EXTENSIÓN Y CARACTERES ESPECIALES
+  // -------------------------------------------------------------
+  const setupImageFallback = (img) => {
+    img.addEventListener('error', function onError() {
+      const src = this.getAttribute('src') || '';
+      
+      if (src.includes('morenobarber')) {
+        if (src.endsWith('morenobarberá.jpg')) {
+          this.src = '/proyectos/morenobarbera.jpg';
+        } else if (src.endsWith('morenobarbera.jpg')) {
+          this.src = '/proyectos/morenobarberá.JPG';
+        } else {
+          this.removeEventListener('error', onError);
+        }
+        return;
+      }
+
+      if (src.includes('sketch-malla') || src.includes('malla_sketch') || src.includes('Malla_sketch')) {
+        if (src.endsWith('sketch-malla.jpg')) {
+          this.src = '/proyectos/La_malla_sketch.jpg';
+        } else if (src.endsWith('La_malla_sketch.jpg')) {
+          this.src = '/proyectos/La_malla_sketch.JPG';
+        } else {
+          this.removeEventListener('error', onError);
+        }
+        return;
+      }
+
+      if (src.endsWith('.png')) {
+        this.src = src.replace('.png', '.PNG');
+      } else if (src.endsWith('.PNG')) {
+        this.src = src.replace('.PNG', '.jpg');
+      } else if (src.endsWith('.jpg')) {
+        this.src = src.replace('.jpg', '.JPG');
+      } else if (src.endsWith('.JPG')) {
+        this.src = src.replace('.JPG', '.png');
+      } else {
+        this.removeEventListener('error', onError);
+      }
+    });
+  };
+
+  // -------------------------------------------------------------
+  // TEMA CLARO / OSCURO
+  // -------------------------------------------------------------
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeWrapper = document.getElementById('theme-wrapper');
+
+  const applyTheme = (isDark) => {
+    if (!themeWrapper || !themeToggle) return;
+
+    if (isDark) {
+      document.documentElement.classList.add('dark-mode');
+      themeWrapper.classList.remove('bg-white', 'text-neutral-900');
+      themeWrapper.classList.add('bg-[#0e0e0e]', 'text-neutral-100');
+
+      themeToggle.classList.remove('bg-neutral-900', 'border-neutral-700/20');
+      themeToggle.classList.add('bg-neutral-100', 'border-neutral-400');
+
+      modalToggleBtn?.classList.remove('bg-white/70', 'text-neutral-900', 'border-neutral-900/20');
+      modalToggleBtn?.classList.add('bg-neutral-800/80', 'text-neutral-100', 'border-white/20');
+
+      const title = document.querySelector('.header-title');
+      if (title) {
+        title.classList.add('text-neutral-100');
+        title.classList.remove('text-neutral-900');
+      }
+
+      document.querySelectorAll('.hover-title').forEach((el) => {
+        el.classList.remove('text-neutral-900');
+        el.classList.add('text-neutral-100');
+      });
+      document.querySelectorAll('.hover-sub').forEach((el) => {
+        el.classList.remove('text-neutral-500');
+        el.classList.add('text-neutral-400');
+      });
+    } else {
+      document.documentElement.classList.remove('dark-mode');
+      themeWrapper.classList.remove('bg-[#0e0e0e]', 'text-neutral-100');
+      themeWrapper.classList.add('bg-white', 'text-neutral-900');
+
+      themeToggle.classList.remove('bg-neutral-100', 'border-neutral-400');
+      themeToggle.classList.add('bg-neutral-900', 'border-neutral-700/20');
+
+      modalToggleBtn?.classList.remove('bg-neutral-800/80', 'text-neutral-100', 'border-white/20');
+      modalToggleBtn?.classList.add('bg-white/70', 'text-neutral-900', 'border-neutral-900/20');
+
+      const title = document.querySelector('.header-title');
+      if (title) {
+        title.classList.remove('text-neutral-100');
+        title.classList.add('text-neutral-900');
+      }
+
+      document.querySelectorAll('.hover-title').forEach((el) => {
+        el.classList.remove('text-neutral-100');
+        el.classList.add('text-neutral-900');
+      });
+      document.querySelectorAll('.hover-sub').forEach((el) => {
+        el.classList.remove('text-neutral-400');
+        el.classList.add('text-neutral-500');
+      });
+    }
+  };
+
+  let isDarkMode = localStorage.getItem('theme') === 'dark';
+  applyTheme(isDarkMode);
+
+  themeToggle?.addEventListener('click', () => {
+    isDarkMode = !isDarkMode;
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    applyTheme(isDarkMode);
+  });
+
+  // -------------------------------------------------------------
+  // LIGHTBOX (MODAL)
+  // -------------------------------------------------------------
+  const lightbox = document.getElementById('lightbox');
+  const lightboxCard = document.getElementById('lightbox-card');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxTitle = document.getElementById('lightbox-title');
+  const lightboxSub = document.getElementById('lightbox-sub');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxPrev = document.getElementById('lightbox-prev');
+  const lightboxNext = document.getElementById('lightbox-next');
+
+  let currentProjectId = 0;
+
+  const renderProjectById = (id) => {
+    if (!lightboxImg || !lightboxTitle || !lightboxSub) return;
+    const item = proyectos.find(p => p.id === id) || proyectos[0];
+
+    lightboxImg.style.opacity = '0';
+    setTimeout(() => {
+      const btnImg = document.querySelector(`.proyecto-btn[data-id="${item.id}"] img`);
+      lightboxImg.src = btnImg ? btnImg.currentSrc || btnImg.src : item.imagen;
+      lightboxImg.alt = item.titulo;
+      lightboxTitle.textContent = item.titulo;
+      lightboxSub.textContent = `${item.ano} · ${item.tipologia}`;
+      lightboxImg.style.opacity = '1';
+    }, 100);
+  };
+
+  const openLightbox = (id) => {
+    if (!lightbox || !lightboxCard) return;
+    currentProjectId = id;
+    renderProjectById(currentProjectId);
+
+    lightbox.classList.remove('opacity-0', 'pointer-events-none');
+    lightbox.classList.add('opacity-100');
+
+    requestAnimationFrame(() => {
+      lightboxCard.classList.remove('scale-90', 'opacity-0');
+      lightboxCard.classList.add('scale-100', 'opacity-100');
+    });
+
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeLightbox = () => {
+    if (!lightbox || !lightboxCard) return;
+
+    lightboxCard.classList.remove('scale-100', 'opacity-100');
+    lightboxCard.classList.add('scale-90', 'opacity-0');
+
+    lightbox.classList.remove('opacity-100');
+    lightbox.classList.add('opacity-0', 'pointer-events-none');
+
+    document.body.style.overflow = '';
+  };
+
+  const showPrev = () => {
+    const currentIndex = proyectos.findIndex(p => p.id === currentProjectId);
+    const prevIndex = (currentIndex - 1 + proyectos.length) % proyectos.length;
+    currentProjectId = proyectos[prevIndex].id;
+    renderProjectById(currentProjectId);
+  };
+
+  const showNext = () => {
+    const currentIndex = proyectos.findIndex(p => p.id === currentProjectId);
+    const nextIndex = (currentIndex + 1) % proyectos.length;
+    currentProjectId = proyectos[nextIndex].id;
+    renderProjectById(currentProjectId);
+  };
+
+  const bindButton = (btn) => {
+    btn.addEventListener('click', () => {
+      const id = parseInt(btn.getAttribute('data-id') || '0', 10);
+      openLightbox(id);
+    });
+  };
+
+  lightboxClose?.addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
+  lightboxPrev?.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+  lightboxNext?.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
+  lightbox?.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+  window.addEventListener('keydown', (e) => {
+    if (lightbox?.classList.contains('opacity-0')) return;
+    if (e.key === 'Escape') {
+      closeLightbox();
+      closeCvModal();
+    }
+    if (e.key === 'ArrowLeft') showPrev();
+    if (e.key === 'ArrowRight') showNext();
+  });
+
+  // -------------------------------------------------------------
+  // MASONRY DINÁMICO POR COLUMNAS REALES (CICLO DE 13)
+  // -------------------------------------------------------------
+  const scrollSentinel = document.getElementById('scroll-sentinel');
+  let catalogoCounter = 1;
+  let ultimoIdTanda = -1;
+
+  const getVisibleColumns = () => {
+    const allCols = Array.from(document.querySelectorAll('.masonry-col'));
+    return allCols.filter(col => window.getComputedStyle(col).display !== 'none');
+  };
+
+  const getShortestColumn = (columns) => {
+    let shortest = columns[0];
+    let minHeight = shortest.offsetHeight;
+    for (let i = 1; i < columns.length; i++) {
+      const h = columns[i].offsetHeight;
+      if (h < minHeight) {
+        minHeight = h;
+        shortest = columns[i];
+      }
+    }
+    return shortest;
+  };
+
+  const crearElementoProyecto = (proyecto) => {
+    const numFormateado = catalogoCounter < 10 ? `0${catalogoCounter}` : `${catalogoCounter}`;
+    catalogoCounter++;
+
+    const article = document.createElement('article');
+    article.className = "proyecto-item block w-full mb-10 sm:mb-14";
+
+    const titleColor = isDarkMode ? 'text-neutral-100' : 'text-neutral-900';
+    const subColor = isDarkMode ? 'text-neutral-400' : 'text-neutral-500';
+
+    article.innerHTML = `
+      <button 
+        type="button"
+        class="proyecto-btn group block w-full text-left border-0 p-0 bg-transparent cursor-pointer select-none"
+        data-id="${proyecto.id}"
+      >
+        <div class="relative w-full overflow-hidden bg-transparent">
+          <img 
+            src="${proyecto.imagen}" 
+            alt="${proyecto.titulo}" 
+            class="w-full h-auto object-contain block transition-opacity duration-200 ease-out group-hover:opacity-75"
+            loading="lazy"
+          />
+        </div>
+        <div class="mt-2.5 flex items-baseline justify-between font-mono pointer-events-none">
+          <span class="text-[11px] sm:text-xs text-neutral-500 tracking-wider">
+            ${numFormateado}
+          </span>
+          <div class="hover-info opacity-0 group-hover:opacity-100 transition-opacity duration-150 text-right">
+            <span class="hover-title text-xs sm:text-sm font-medium ${titleColor} block leading-tight">
+              ${proyecto.titulo}
+            </span>
+            <span class="hover-sub text-[10px] sm:text-xs ${subColor} italic block">
+              ${proyecto.tipologia}
+            </span>
+          </div>
+        </div>
+      </button>
+    `;
+
+    const img = article.querySelector('img');
+    if (img) setupImageFallback(img);
+
+    const btn = article.querySelector('.proyecto-btn');
+    if (btn) bindButton(btn);
+
+    return article;
+  };
+
+  const barajarTanda = (lista, ultimoId) => {
+    const copia = [...lista];
+    for (let i = copia.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copia[i], copia[j]] = [copia[j], copia[i]];
+    }
+    if (copia[0].id === ultimoId) {
+      const medio = Math.floor(copia.length / 2);
+      [copia[0], copia[medio]] = [copia[medio], copia[0]];
+    }
+    return copia;
+  };
+
+  const renderCycle = (isInitial = false) => {
+    const columns = getVisibleColumns();
+    if (columns.length === 0) return;
+
+    const tanda = isInitial ? proyectos : barajarTanda(proyectos, ultimoIdTanda);
+    ultimoIdTanda = tanda[tanda.length - 1].id;
+
+    tanda.forEach((proyecto) => {
+      const targetCol = getShortestColumn(columns);
+      const elem = crearElementoProyecto(proyecto);
+      targetCol.appendChild(elem);
+    });
+  };
+
+  renderCycle(true);
+
+  let isAppending = false;
+  const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !isAppending) {
+      isAppending = true;
+      renderCycle(false);
+      setTimeout(() => {
+        isAppending = false;
+      }, 300);
+    }
+  }, { rootMargin: '150px' });
+
+  if (scrollSentinel) observer.observe(scrollSentinel);
+</script>
