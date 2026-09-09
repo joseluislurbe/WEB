@@ -242,15 +242,8 @@ const proyectos = [
 
         <div class="grid grid-cols-[100px_1fr] gap-4 items-start leading-relaxed">
           <span class="font-mono font-medium text-neutral-400 text-xs uppercase tracking-wider pt-0.5">Competitions</span>
-          <div class="space-y-3 text-neutral-200">
-            <div>
-              <p class="font-semibold text-white">Malla Estructural Prototype</p>
-              <p class="text-neutral-400 text-[11px] sm:text-xs">Academic investigation on modular lightweight grids, 2025</p>
-            </div>
-            <div>
-              <p class="font-semibold text-white">Taller Sert Intervention</p>
-              <p class="text-neutral-400 text-[11px] sm:text-xs">Design proposal exploring Mediterranean architectural typologies, 2025</p>
-            </div>
+          <div class="space-y-3 text-neutral-200 text-neutral-400 italic text-[12px]">
+            <!-- Apartado vacío listo para futuras incorporaciones -->
           </div>
         </div>
 
@@ -280,7 +273,9 @@ const proyectos = [
           <span class="font-mono font-medium text-neutral-400 text-xs uppercase tracking-wider pt-0.5">Languages</span>
           <div class="space-y-1 text-neutral-200">
             <p><span class="text-white font-medium">Spanish:</span> Native</p>
-            <p><span class="text-white font-medium">English:</span> Fluent</p>
+            <p><span class="text-white font-medium">English:</span> Native</p>
+            <p><span class="text-white font-medium">Catalan:</span> Native</p>
+            <p><span class="text-white font-medium">French:</span> Basic</p>
           </div>
         </div>
 
@@ -702,7 +697,6 @@ const proyectos = [
     const img = article.querySelector('img');
     if (img) {
       setupImageFallback(img);
-      // Animación fade-in automática cuando la imagen termina de cargar en el navegador
       if (img.complete) {
         img.classList.add('loaded');
       } else {
