@@ -630,10 +630,9 @@ const proyectos = [
   });
 
   // -------------------------------------------------------------
-  // MASONRY DINÁMICO CON LAZY LOADING Y ANIMACIÓN FADE-IN
+  // MASONRY DINÁMICO CON NÚMERO FIJO, LAZY LOADING Y FADE-IN
   // -------------------------------------------------------------
   const scrollSentinel = document.getElementById('scroll-sentinel');
-  let catalogoCounter = 1;
   let ultimoIdTanda = -1;
 
   const getVisibleColumns = () => {
@@ -655,9 +654,6 @@ const proyectos = [
   };
 
   const crearElementoProyecto = (proyecto) => {
-    const numFormateado = catalogoCounter < 10 ? `0${catalogoCounter}` : `${catalogoCounter}`;
-    catalogoCounter++;
-
     const article = document.createElement('article');
     article.className = "proyecto-item block w-full mb-10 sm:mb-14";
 
@@ -681,7 +677,7 @@ const proyectos = [
         </div>
         <div class="mt-2.5 flex items-baseline justify-between font-mono pointer-events-none">
           <span class="text-[11px] sm:text-xs text-neutral-500 tracking-wider">
-            ${numFormateado}
+            ${proyecto.numero}
           </span>
           <div class="hover-info opacity-0 group-hover:opacity-100 transition-opacity duration-150 text-right">
             <span class="hover-title text-xs sm:text-sm font-medium ${titleColor} block leading-tight">
