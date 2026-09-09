@@ -297,7 +297,7 @@ const proyectos = [
       </div>
     </aside>
 
-    <!-- MASONRY REAL MULTICOLUMNA -->
+    <!-- MASONRY REAL MULTICOLUMNA CON EFECTO FADE-IN DE CARGA -->
     <main class="w-full px-4 sm:px-8 md:px-10 lg:px-12 py-10">
       <div 
         id="masonry-container" 
@@ -368,6 +368,21 @@ const proyectos = [
     </div>
   </div>
 </Layout>
+
+<style>
+  /* Animación de fundido suave (fade-in) para las imágenes al terminar de cargar */
+  .img-lazy {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+  .img-lazy.loaded {
+    opacity: 1;
+  }
+  /* Contenedor esqueleto sutil mientras carga */
+  .img-skeleton {
+    background-color: rgba(150, 150, 150, 0.08);
+  }
+</style>
 
 <script define:vars={{ proyectos }}>
   // -------------------------------------------------------------
@@ -619,7 +634,7 @@ const proyectos = [
   });
 
   // -------------------------------------------------------------
-  // MASONRY DINÁMICO POR COLUMNAS REALES (CICLO DE 13)
+  // MASONRY DINÁMICO CON LAZY LOADING Y ANIMACIÓN FADE-IN
   // -------------------------------------------------------------
   const scrollSentinel = document.getElementById('scroll-sentinel');
   let catalogoCounter = 1;
@@ -659,12 +674,13 @@ const proyectos = [
         class="proyecto-btn group block w-full text-left border-0 p-0 bg-transparent cursor-pointer select-none"
         data-id="${proyecto.id}"
       >
-        <div class="relative w-full overflow-hidden bg-transparent">
+        <div class="relative w-full overflow-hidden img-skeleton">
           <img 
             src="${proyecto.imagen}" 
             alt="${proyecto.titulo}" 
-            class="w-full h-auto object-contain block transition-opacity duration-200 ease-out group-hover:opacity-75"
+            class="w-full h-auto object-contain block img-lazy"
             loading="lazy"
+            decoding="async"
           />
         </div>
         <div class="mt-2.5 flex items-baseline justify-between font-mono pointer-events-none">
@@ -684,7 +700,17 @@ const proyectos = [
     `;
 
     const img = article.querySelector('img');
-    if (img) setupImageFallback(img);
+    if (img) {
+      setupImageFallback(img);
+      // Animación fade-in automática cuando la imagen termina de cargar en el navegador
+      if (img.complete) {
+        img.classList.add('loaded');
+      } else {
+        img.addEventListener('load', () => {
+          img.classList.add('loaded');
+        });
+      }
+    }
 
     const btn = article.querySelector('.proyecto-btn');
     if (btn) bindButton(btn);
