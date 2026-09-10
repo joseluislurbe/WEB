@@ -293,23 +293,16 @@ const proyectos = [
       </div>
     </aside>
 
-    <!-- MASONRY MULTICOLUMNA: 2 columnas en móvil (flex), más columnas en pantallas medianas/grandes -->
+    <!-- MASONRY MULTICOLUMNA -->
     <main class="w-full px-4 sm:px-8 md:px-10 lg:px-12 py-10">
       <div 
         id="masonry-container" 
         class="flex gap-4 sm:gap-8 md:gap-10 lg:gap-12 items-start justify-between w-full"
       >
-        <!-- Columna 1 y 2: Visibles siempre (también en móvil) -->
         <div class="masonry-col flex-1 flex flex-col"></div>
         <div class="masonry-col flex-1 flex flex-col"></div>
-        
-        <!-- Columna 3: A partir de sm (tablets pequeñas en adelante) -->
         <div class="masonry-col flex-1 flex flex-col hidden sm:flex"></div>
-        
-        <!-- Columna 4: A partir de md / lg -->
         <div class="masonry-col flex-1 flex flex-col hidden md:flex"></div>
-        
-        <!-- Columna 5: A partir de pantallas grandes lg -->
         <div class="masonry-col flex-1 flex flex-col hidden lg:flex"></div>
       </div>
 
@@ -325,12 +318,11 @@ const proyectos = [
     ></button>
   </div>
 
-  <!-- Visor modal (Lightbox) optimizado -->
+  <!-- Visor modal (Lightbox) -->
   <div 
     id="lightbox" 
     class="fixed inset-0 z-50 bg-neutral-950/40 backdrop-blur-xl opacity-0 pointer-events-none transition-all duration-300 ease-out flex items-center justify-center p-2 sm:p-6 cursor-zoom-out select-none overflow-hidden"
   >
-    <!-- Imagen de fondo difuminada para efecto orgánico -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
       <img id="lightbox-bg-blur" src="" alt="" class="w-full h-full object-cover filter blur-3xl opacity-35 scale-110 transition-all duration-500" />
       <div class="absolute inset-0 bg-neutral-950/10"></div>
@@ -352,7 +344,6 @@ const proyectos = [
       &#x2192;
     </button>
 
-    <!-- Contenedor ajustado con margen interior -->
     <div 
       id="lightbox-wrapper"
       class="relative z-10 w-full h-full flex items-center justify-center p-6 sm:p-14 cursor-zoom-out"
@@ -388,6 +379,17 @@ const proyectos = [
   }
   .img-skeleton {
     background-color: rgba(150, 150, 150, 0.08);
+  }
+
+  /* Animación escalonada más marcada (Fade-In Up) */
+  .fade-in-item {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .fade-in-item.appear {
+    opacity: 1;
+    transform: translateY(0);
   }
 </style>
 
@@ -642,7 +644,6 @@ const proyectos = [
   lightboxPrev?.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
   lightboxNext?.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
   
-  // Cierre al pulsar cerca de la foto
   lightboxWrapper?.addEventListener('click', (e) => {
     closeLightbox();
   });
@@ -671,10 +672,19 @@ const proyectos = [
   });
 
   // -------------------------------------------------------------
-  // MASONRY DINÁMICO OPTIMIZADO PARA MÓVIL (SCROLL INFINITO)
+  // MASONRY DINÁMICO CON ANIMACIÓN ESCALONADA (FADE-IN UP)
   // -------------------------------------------------------------
   const scrollSentinel = document.getElementById('scroll-sentinel');
   let ultimoIdTanda = -1;
+
+  const itemObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('appear');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
 
   const getVisibleColumns = () => {
     const allCols = Array.from(document.querySelectorAll('.masonry-col'));
@@ -694,9 +704,10 @@ const proyectos = [
     return shortest;
   };
 
-  const crearElementoProyecto = (proyecto) => {
+  const crearElementoProyecto = (proyecto, index) => {
     const article = document.createElement('article');
-    article.className = "proyecto-item block w-full mb-10 sm:mb-14";
+    article.className = "proyecto-item block w-full mb-10 sm:mb-14 fade-in-item";
+    article.style.transitionDelay = `${(index % 4) * 0.1}s`;
 
     const titleColor = isDarkMode ? 'text-neutral-100' : 'text-neutral-900';
     const subColor = isDarkMode ? 'text-neutral-400' : 'text-neutral-500';
@@ -748,6 +759,8 @@ const proyectos = [
     const btn = article.querySelector('.proyecto-btn');
     if (btn) bindButton(btn);
 
+    itemObserver.observe(article);
+
     return article;
   };
 
@@ -771,9 +784,9 @@ const proyectos = [
     const tanda = isInitial ? proyectos : barajarTanda(proyectos, ultimoIdTanda);
     ultimoIdTanda = tanda[tanda.length - 1].id;
 
-    tanda.forEach((proyecto) => {
+    tanda.forEach((proyecto, index) => {
       const targetCol = getShortestColumn(columns);
-      const elem = crearElementoProyecto(proyecto);
+      const elem = crearElementoProyecto(proyecto, index);
       targetCol.appendChild(elem);
     });
   };
