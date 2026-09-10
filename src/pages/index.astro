@@ -293,7 +293,7 @@ const proyectos = [
       </div>
     </aside>
 
-    <!-- MASONRY REAL MULTICOLUMNA CON EFECTO FADE-IN DE CARGA -->
+    <!-- MASONRY REAL MULTICOLUMNA CON OPTIMIZACIÓN MÓVIL -->
     <main class="w-full px-4 sm:px-8 md:px-10 lg:px-12 py-10">
       <div 
         id="masonry-container" 
@@ -366,15 +366,15 @@ const proyectos = [
 </Layout>
 
 <style>
-  /* Animación de fundido suave (fade-in) para las imágenes al terminar de cargar */
+  /* Animación de fundido suave (fade-in) para las imágenes al cargar */
   .img-lazy {
     opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.4s ease-in-out;
+    content-visibility: auto;
   }
   .img-lazy.loaded {
     opacity: 1;
   }
-  /* Contenedor esqueleto sutil mientras carga */
   .img-skeleton {
     background-color: rgba(150, 150, 150, 0.08);
   }
@@ -630,7 +630,7 @@ const proyectos = [
   });
 
   // -------------------------------------------------------------
-  // MASONRY DINÁMICO CON NÚMERO FIJO, LAZY LOADING Y FADE-IN
+  // MASONRY DINÁMICO OPTIMIZADO PARA MÓVIL
   // -------------------------------------------------------------
   const scrollSentinel = document.getElementById('scroll-sentinel');
   let ultimoIdTanda = -1;
@@ -673,6 +673,7 @@ const proyectos = [
             class="w-full h-auto object-contain block img-lazy"
             loading="lazy"
             decoding="async"
+            fetchpriority="low"
           />
         </div>
         <div class="mt-2.5 flex items-baseline justify-between font-mono pointer-events-none">
