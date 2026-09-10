@@ -672,7 +672,7 @@ const proyectos = [
   });
 
   // -------------------------------------------------------------
-  // MASONRY DINÁMICO CON ANIMACIÓN ESCALONADA (FADE-IN UP)
+  // MASONRY DINÁMICO OPTIMIZADO PARA MÓVIL (SCROLL INFINITO)
   // -------------------------------------------------------------
   const scrollSentinel = document.getElementById('scroll-sentinel');
   let ultimoIdTanda = -1;
@@ -712,20 +712,23 @@ const proyectos = [
     const titleColor = isDarkMode ? 'text-neutral-100' : 'text-neutral-900';
     const subColor = isDarkMode ? 'text-neutral-400' : 'text-neutral-500';
 
+    // Las dos primeras imágenes cargan de inmediato para que el móvil no espere
+    const isPriority = index < 2;
+
     article.innerHTML = `
       <button 
         type="button"
         class="proyecto-btn group block w-full text-left border-0 p-0 bg-transparent cursor-pointer select-none"
         data-id="${proyecto.id}"
       >
-        <div class="relative w-full overflow-hidden img-skeleton">
+        <div class="relative w-full overflow-hidden img-skeleton bg-neutral-100 dark:bg-neutral-900">
           <img 
             src="${proyecto.imagen}" 
             alt="${proyecto.titulo}" 
             class="w-full h-auto object-contain block img-lazy"
-            loading="lazy"
+            loading="${isPriority ? 'eager' : 'lazy'}"
             decoding="async"
-            fetchpriority="low"
+            ${isPriority ? 'fetchpriority="high"' : 'fetchpriority="low"'}
           />
         </div>
         <div class="mt-2.5 flex items-baseline justify-between font-mono pointer-events-none">
