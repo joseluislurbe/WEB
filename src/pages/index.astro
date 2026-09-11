@@ -368,46 +368,34 @@ const proyectos = [
 </Layout>
 
 <style>
-  /* Animación de fundido suave (fade-in) para las imágenes al cargar */
+  /* Ocultar cualquier icono de error nativo del navegador móvil si la imagen tarda */
+  img:-moz-broken {
+    visibility: hidden;
+  }
+  img {
+    text-indent: -9999px;
+  }
+
+  /* Animación de fundido suave y limpieza de carga */
   .img-lazy {
     opacity: 0;
-    transition: opacity 0.4s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
     content-visibility: auto;
   }
   .img-lazy.loaded {
     opacity: 1;
   }
   
-  /* Esqueleto de carga refinado con destello suave (*shimmer*) */
+  /* Contenedor con fondo sólido neutro para que nunca se vea hueco ni icono de error */
   .img-skeleton {
-    background-color: rgba(120, 120, 120, 0.08);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .img-skeleton::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.15),
-      transparent
-    );
-    animation: shimmer 1.5s infinite;
-  }
-
-  @keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+    background-color: rgba(128, 128, 128, 0.12);
   }
 
   /* Animación escalonada (Fade-In Up) */
   .fade-in-item {
     opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .fade-in-item.appear {
     opacity: 1;
@@ -694,7 +682,7 @@ const proyectos = [
   });
 
   // -------------------------------------------------------------
-  // MASONRY DINÁMICO CON ESPACIADO COMPACTO Y SKELETON
+  // MASONRY DINÁMICO OPTIMIZADO PARA MÓVIL
   // -------------------------------------------------------------
   const scrollSentinel = document.getElementById('scroll-sentinel');
   let ultimoIdTanda = -1;
@@ -729,7 +717,7 @@ const proyectos = [
   const crearElementoProyecto = (proyecto, index) => {
     const article = document.createElement('article');
     article.className = "proyecto-item block w-full mb-3 sm:mb-6 fade-in-item";
-    article.style.transitionDelay = `${(index % 4) * 0.1}s`;
+    article.style.transitionDelay = `${(index % 4) * 0.05}s`;
 
     const titleColor = isDarkMode ? 'text-neutral-100' : 'text-neutral-900';
     const subColor = isDarkMode ? 'text-neutral-400' : 'text-neutral-500';
