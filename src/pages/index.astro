@@ -494,7 +494,7 @@ const proyectos = [
   };
 
   // -------------------------------------------------------------
-  // TEMA CLARO / OSCURO (NUMERACIÓN DINÁMICA BLANCO / NEGRO)
+  // TEMA CLARO / OSCURO (CAMBIO DINÁMICO DE TÍTULO Y NÚMEROS)
   // -------------------------------------------------------------
   const themeToggle = document.getElementById('theme-toggle');
   const themeWrapper = document.getElementById('theme-wrapper');
@@ -515,8 +515,8 @@ const proyectos = [
 
       const title = document.querySelector('.header-title');
       if (title) {
-        title.classList.add('text-neutral-100');
         title.classList.remove('text-neutral-900');
+        title.classList.add('text-white');
       }
 
       document.querySelectorAll('.project-number').forEach((el) => {
@@ -545,7 +545,7 @@ const proyectos = [
 
       const title = document.querySelector('.header-title');
       if (title) {
-        title.classList.remove('text-neutral-100');
+        title.classList.remove('text-white');
         title.classList.add('text-neutral-900');
       }
 
@@ -716,7 +716,6 @@ const proyectos = [
 
   const crearElementoProyecto = (proyecto, index) => {
     const article = document.createElement('article');
-    // Margen inferior ultra reducido (mb-1.5 en móvil, sm:mb-4 en desktop) para juntarlas al máximo
     article.className = "proyecto-item block w-full mb-1.5 sm:mb-4 fade-in-item";
     article.style.transitionDelay = `${(index % 4) * 0.05}s`;
 
