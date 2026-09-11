@@ -294,7 +294,7 @@ const proyectos = [
     </aside>
 
     <!-- MASONRY MULTICOLUMNA -->
-    <main class="w-full px-4 sm:px-8 md:px-10 lg:px-12 py-10">
+    <main class="w-full px-4 sm:px-8 md:px-10 lg:px-12 py-6">
       <div 
         id="masonry-container" 
         class="flex gap-4 sm:gap-8 md:gap-10 lg:gap-12 items-start justify-between w-full"
@@ -306,7 +306,7 @@ const proyectos = [
         <div class="masonry-col flex-1 flex flex-col hidden lg:flex"></div>
       </div>
 
-      <div id="scroll-sentinel" class="w-full h-32"></div>
+      <div id="scroll-sentinel" class="w-full h-24"></div>
     </main>
 
     <!-- Botón flotante tema claro / oscuro -->
@@ -484,7 +484,7 @@ const proyectos = [
   };
 
   // -------------------------------------------------------------
-  // TEMA CLARO / OSCURO
+  // TEMA CLARO / OSCURO (NUMERACIÓN DINÁMICA BLANCO / NEGRO)
   // -------------------------------------------------------------
   const themeToggle = document.getElementById('theme-toggle');
   const themeWrapper = document.getElementById('theme-wrapper');
@@ -508,6 +508,11 @@ const proyectos = [
         title.classList.add('text-neutral-100');
         title.classList.remove('text-neutral-900');
       }
+
+      document.querySelectorAll('.project-number').forEach((el) => {
+        el.classList.remove('text-neutral-900');
+        el.classList.add('text-white');
+      });
 
       document.querySelectorAll('.hover-title').forEach((el) => {
         el.classList.remove('text-neutral-900');
@@ -533,6 +538,11 @@ const proyectos = [
         title.classList.remove('text-neutral-100');
         title.classList.add('text-neutral-900');
       }
+
+      document.querySelectorAll('.project-number').forEach((el) => {
+        el.classList.remove('text-white');
+        el.classList.add('text-neutral-900');
+      });
 
       document.querySelectorAll('.hover-title').forEach((el) => {
         el.classList.remove('text-neutral-100');
@@ -644,22 +654,12 @@ const proyectos = [
   lightboxPrev?.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
   lightboxNext?.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
   
-  lightboxWrapper?.addEventListener('click', (e) => {
-    closeLightbox();
-  });
-  lightbox?.addEventListener('click', (e) => {
-    closeLightbox();
-  });
+  lightboxWrapper?.addEventListener('click', () => closeLightbox());
+  lightbox?.addEventListener('click', () => closeLightbox());
 
-  lightboxCard?.addEventListener('click', (e) => {
-    e.stopPropagation();
-  });
-  lightboxPrev?.addEventListener('click', (e) => {
-    e.stopPropagation();
-  });
-  lightboxNext?.addEventListener('click', (e) => {
-    e.stopPropagation();
-  });
+  lightboxCard?.addEventListener('click', (e) => e.stopPropagation());
+  lightboxPrev?.addEventListener('click', (e) => e.stopPropagation());
+  lightboxNext?.addEventListener('click', (e) => e.stopPropagation());
 
   window.addEventListener('keydown', (e) => {
     if (lightbox?.classList.contains('opacity-0')) return;
@@ -672,7 +672,7 @@ const proyectos = [
   });
 
   // -------------------------------------------------------------
-  // MASONRY DINÁMICO OPTIMIZADO PARA MÓVIL (SCROLL INFINITO)
+  // MASONRY DINÁMICO CON ESPACIADO REDUCIDO Y SCROLL INFINITO
   // -------------------------------------------------------------
   const scrollSentinel = document.getElementById('scroll-sentinel');
   let ultimoIdTanda = -1;
@@ -706,13 +706,14 @@ const proyectos = [
 
   const crearElementoProyecto = (proyecto, index) => {
     const article = document.createElement('article');
-    article.className = "proyecto-item block w-full mb-10 sm:mb-14 fade-in-item";
+    // Margen vertical reducido (mb-5 en móvil, mb-8 en desktop) para juntarlas como en la web de referencia
+    article.className = "proyecto-item block w-full mb-5 sm:mb-8 fade-in-item";
     article.style.transitionDelay = `${(index % 4) * 0.1}s`;
 
     const titleColor = isDarkMode ? 'text-neutral-100' : 'text-neutral-900';
     const subColor = isDarkMode ? 'text-neutral-400' : 'text-neutral-500';
+    const numberColor = isDarkMode ? 'text-white' : 'text-neutral-900';
 
-    // Las dos primeras imágenes cargan de inmediato para que el móvil no espere
     const isPriority = index < 2;
 
     article.innerHTML = `
@@ -732,7 +733,7 @@ const proyectos = [
           />
         </div>
         <div class="mt-2.5 flex items-baseline justify-between font-mono pointer-events-none">
-          <span class="text-[11px] sm:text-xs text-neutral-500 tracking-wider">
+          <span class="project-number text-[11px] sm:text-xs ${numberColor} tracking-wider transition-colors duration-300">
             ${proyecto.numero}
           </span>
           <div class="hover-info opacity-0 group-hover:opacity-100 transition-opacity duration-150 text-right">
