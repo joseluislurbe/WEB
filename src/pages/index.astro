@@ -377,8 +377,30 @@ const proyectos = [
   .img-lazy.loaded {
     opacity: 1;
   }
+  
+  /* Esqueleto de carga refinado con destello suave (*shimmer*) */
   .img-skeleton {
-    background-color: rgba(150, 150, 150, 0.08);
+    background-color: rgba(120, 120, 120, 0.08);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .img-skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.15),
+      transparent
+    );
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
   }
 
   /* Animación escalonada (Fade-In Up) */
@@ -672,7 +694,7 @@ const proyectos = [
   });
 
   // -------------------------------------------------------------
-  // MASONRY DINÁMICO CON ESPACIADO REDUCIDO Y SCROLL INFINITO
+  // MASONRY DINÁMICO CON ESPACIADO COMPACTO Y SKELETON
   // -------------------------------------------------------------
   const scrollSentinel = document.getElementById('scroll-sentinel');
   let ultimoIdTanda = -1;
@@ -706,8 +728,7 @@ const proyectos = [
 
   const crearElementoProyecto = (proyecto, index) => {
     const article = document.createElement('article');
-    // Margen vertical reducido (mb-5 en móvil, mb-8 en desktop) para juntarlas como en la web de referencia
-    article.className = "proyecto-item block w-full mb-5 sm:mb-8 fade-in-item";
+    article.className = "proyecto-item block w-full mb-3 sm:mb-6 fade-in-item";
     article.style.transitionDelay = `${(index % 4) * 0.1}s`;
 
     const titleColor = isDarkMode ? 'text-neutral-100' : 'text-neutral-900';
@@ -722,7 +743,7 @@ const proyectos = [
         class="proyecto-btn group block w-full text-left border-0 p-0 bg-transparent cursor-pointer select-none"
         data-id="${proyecto.id}"
       >
-        <div class="relative w-full overflow-hidden img-skeleton bg-neutral-100 dark:bg-neutral-900">
+        <div class="relative w-full overflow-hidden img-skeleton">
           <img 
             src="${proyecto.imagen}" 
             alt="${proyecto.titulo}" 
